@@ -12,7 +12,7 @@ password1 = ["Mike1995"]
 password2 = ["m@ggie123!"] 
 password3 = ["bell@123!"]
 if user_name_input == "michaelsmith19951" && password_input == "Mike1995"
-	p "Login successful!"
+	redirect '/calculator_app_page2?user_name_input=' + user_name_input + '&password_input=' + password_input
 else
 	p "Incorrect login. Please try again."
 
@@ -29,5 +29,9 @@ end
 end
 end
 end
-
+get '/calculator_app_page2' do
+	first_name_input = params[:first_name_input]
+	last_name_input = params[:last_name_input]
+	erb :calculator_app_page2, locals:{first_name_input: params[first_name_input], last_name_input: params[:last_name_input]}
+end
 
