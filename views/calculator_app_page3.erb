@@ -1,0 +1,25 @@
+<body>
+<h1> Thanks, <%=first_name_input%> <%=last_name_input%>! Now you can choose which two numbers you want to add, subtract, multiply, or divide. Which operation you choose is your choice.</h1>
+<form method = "post" action = "calculator_app_page3">
+<input type="hidden" name="first_name_input" value="<%=first_name_input%>">
+<input type="hidden" name="last_name_input" value="<%=last_name_input%>">
+<h3> First Number</h3>
+<input type="number" name = "num1" required autofocus>
+<h3> Second Number</h3>
+<input type = "number" name = "num2" required>
+<br><br>
+<input type = "radio" name = "math_operation" value = "+" id = "Add" required>
+<label for = "Add">Add</label>
+<br><br>
+<input type = "radio" name = "math_operation" value = "-" id = "Subtract" required>
+<label for = "Subtract">Subtract</label>
+<br><br>
+<input type = "radio" name = "math_operation" value = "*" id = "Multiply" required>
+<label for = "Multiply">Multiply</label>
+<br><br>
+<input type= "radio" name = "math_operation" value = "/" id = "Divide" required>
+<label for = "Divide">Divide</label>
+<br><br>
+<input class = "button" type = "submit" value = "Calculate" onclick>
+</form>
+</body>
