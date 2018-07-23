@@ -1,4 +1,5 @@
 require "sinatra"
+require_relative "math_functions.rb"
 get '/' do
 	erb :calculator_app_page1, locals:{error: ""}
 end
@@ -32,6 +33,20 @@ post '/calculator_app_page2' do
 	redirect '/calculator_app_page3?first_name_input=' + first_name_input + '&last_name_input=' + last_name_input
 end
 get '/calculator_app_page3' do
+	val1 = session[:val1] || ""
+	val2 = session[:val2] || ""
+	operation = session[:operation]  || ""
+	result = session[:result]  || ""
+	case operation
+	when "add"
+		operation = "+"
+	when "subtract"
+		operation = "-"
+	when "multiply"
+		operation = "*"
+	when "divide"
+		operation = "/"
+	end
 	first_name_input = params[:first_name_input]
 	last_name_input = params[:last_name_input]
 	num1 = params[:num1]
@@ -40,8 +55,10 @@ get '/calculator_app_page3' do
 	erb :calculator_app_page3, locals:{first_name_input: params[:first_name_input], last_name_input: params[:last_name_input], num1: params[:num1], num2: params[:num2], math_operation: params[:math_operation]}
 end
 post '/calculator_app_page3' do
-	puts "in post '/calculator_app_page3' do params is #{params}"
-	'{"first_name_input"=>"Michael", "last_name_input"=>"Smith", "num1"=>"3", "num2"=>"5", "math_operation"=>"+"}'
+	session[:val1] = params[:num1]
+	session[:val2] = params[:num2]
+	session[:operation] = params[:math]
+	session[:result] = calculate(session[:operation], params[:num1], params[:num2])
 	first_name_input = params[:first_name_input]
 	last_name_input = params[:last_name_input]
 	num1 = params[:num1]
