@@ -1,0 +1,36 @@
+body {
+	text-align: center;
+	background-image: url("/images/calculator_background.jpg");
+	color: orange;
+	background-size: cover;
+	font-weight: bold;
+}
+
+
+.button {
+	background-color: #09074f; /* Dark Blue*/
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.button:hover {
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+	.button:active{
+		background-color: #3e8e41;
+		transform: translate(4px);
+	}
+.box_div {
+	align-items: center;
+	background-color: lightgrey;
+	width: 300px;
+	border: 25px solid green;
+	padding: 25px;
+	margin: 25px;
+}
