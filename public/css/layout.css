@@ -1,6 +1,6 @@
 body {
 	text-align: center;
-	background-image: url("/images/calculator_background.jpg");
+	background-color: #a6c12a; /* Tan Yellow*/
 	color: orange;
 	background-size: cover;
 	font-weight: bold;
@@ -23,10 +23,11 @@ body {
 }
 
 	.button:active{
-		background-color: #3e8e41;
+		background-color: #6016f4;	/* Purple*/
 		transform: translate(4px);
 	}
 .box_div {
+	text-align: center;
 	align-items: center;
 	background-color: lightgrey;
 	width: 300px;
