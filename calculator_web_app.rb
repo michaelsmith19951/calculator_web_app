@@ -1,5 +1,6 @@
 require "sinatra"
 require_relative "math_functions.rb"
+
 get '/' do
 	erb :calculator_app_page1, locals:{error: ""}
 end
@@ -35,17 +36,17 @@ end
 get '/calculator_app_page3' do
 	val1 = session[:val1] || ""
 	val2 = session[:val2] || ""
-	operation = session[:operation]  || ""
+	math_operation = session[:math_operation]  || ""
 	result = session[:result]  || ""
-	case operation
+	case math_operation
 	when "add"
-		operation = "+"
+		math_operation = "+"
 	when "subtract"
-		operation = "-"
+		math_operation = "-"
 	when "multiply"
-		operation = "*"
+		math_operation = "*"
 	when "divide"
-		operation = "/"
+		math_operation = "/"
 	end
 	first_name_input = params[:first_name_input]
 	last_name_input = params[:last_name_input]
@@ -55,32 +56,65 @@ get '/calculator_app_page3' do
 	erb :calculator_app_page3, locals:{first_name_input: params[:first_name_input], last_name_input: params[:last_name_input], num1: params[:num1], num2: params[:num2], math_operation: params[:math_operation]}
 end
 post '/calculator_app_page3' do
+	# puts params
+	'{"first_name_input"=>"Michael", "last_name_input"=>"Smith", "num1"=>"2", "num2"=>"2", "math_operation"=>"+"}'
 	session[:val1] = params[:num1]
 	session[:val2] = params[:num2]
-	session[:operation] = params[:math]
+	session[:operation] = params[:math_operation]
+	puts "before calculate, calculate(#{session[:operation]}, #{params[:num1]}, #{params[:num2]})"
 	session[:result] = calculate(session[:operation], params[:num1], params[:num2])
+	result = session[:result]
 	first_name_input = params[:first_name_input]
 	last_name_input = params[:last_name_input]
 	num1 = params[:num1]
 	num2 = params[:num2]
-	math_operation = params[:math_operation]
-	redirect '/calculator_app_final_page?first_name_input=' + first_name_input + '&last_name_input=' + last_name_input + '&num1=' + num1 + '&num2=' + num2 + '&math_operation=' + math_operation
+	math_operation = params[:math_operation].to_s
+	puts "in page3 math_operation is #{math_operation} and its class is #{math_operation.class}"
+	puts "session[:result] is #{session[:result]}"
+	if math_operation == "+"
+		math_operation = "plus"
+	end
+	if math_operation == "/" && num2 == 0
+		p "You can't divide by zero! Please enter another number."
+		nil
+	else
+	end
+	redirect '/calculator_app_final_page?first_name_input=' + first_name_input + '&last_name_input=' + last_name_input + '&num1=' + num1 + '&num2=' + num2 + '&result=' + result.to_s + '&math_operation=' + math_operation
 end
 get '/calculator_app_final_page' do
+	puts "in calculator_app_final_page params is #{params}"
+	puts "in final page result is #{params[:result]}"
+	puts "math_operation is #{params[:math_operation]}"
 	first_name_input = params[:first_name_input]
 	last_name_input = params[:last_name_input]
 	num1 = params[:num1]
 	num2 = params[:num2]
 	math_operation = params[:math_operation]
+	if math_operation == 'plus'
+		math_operation = '+'
+	end
+	if math_operation == "/" && num2 == 0
+		p "You can't divide by zero! Please enter another number."
+		nil
+	else
+	end
 	result = params[:result]
-	erb :calculator_app_final_page, locals:{first_name_input: params[:first_name_input], last_name_input: params[:last_name_input], num1: params[:num1], num2: params[:num2], math_operation: params[:math_operation], result: params[:result]}
+	puts "math_operation is #{math_operation}"
+	erb :calculator_app_final_page, locals:{first_name_input: params[:first_name_input], last_name_input: params[:last_name_input], num1: params[:num1], math_operation: math_operation, num2: params[:num2], result:params[:result]}
 end
 post '/calculator_app_final_page' do
 	first_name_input = params[:first_name_input]
 	last_name_input = params[:last_name_input]
 	num1 = params[:num1]
-	num2 = params[:num2]
 	math_operation = params[:math_operation]
+	num2 = params[:num2]
 	result = params[:result]
-	redirect '/calculator_app_page3?first_name_input=' + first_name_input + '&last_name_input=' + last_name_input
+	session[:solution] = calculator_app_page3(params[:num1], params[:math_operation], params[:num2])
+	erb :calculator_app_page3, locals:{first_name_input: params[:first_name_input], last_name_input: params[:last_name_input], solution: session[:solution]}
 end
+get '/credentials' do
+	erb :credentials
+end
+
+	# redirect '/calculator_app_page3?first_name_input=' + first_name_input + '&last_name_input=' + last_name_input
+# end

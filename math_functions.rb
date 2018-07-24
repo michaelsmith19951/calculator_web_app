@@ -1,18 +1,3 @@
-def calculate(operation, num1, num2)
-	num1 = num1.to_i
-	num2 = num2.to_i
-	case operation
-	when "addition"
-		return add_numbers(num1, num2)
-	when "subtraction"
-		return subtract_numbers(num1, num2)
-	when "multiplication"
-		return multiply_numbers(num1, num2)
-	when "division"
-		return divide_numbers(num1, num2)
-	end
-end
-
 
 
 # Function that performs addition
@@ -58,6 +43,7 @@ def division(first_number, second_number)
 # Conditional that removes divide by zero error
 if second_number == 0
 	nil
+p "You can't divide by zero! Please enter another number."
 else
 if (first_number == "") || (second_number == "")
 	nil
@@ -70,3 +56,21 @@ end
 	answer
 
 end
+
+
+def calculate(math_operation, num1, num2)
+	num1 = num1.to_i
+	num2 = num2.to_i
+	case math_operation
+	when "+"
+		return addition(num1, num2)
+	when "-"
+		return subtraction(num1, num2)
+	when "*"
+		return multiplication(num1, num2)
+	when "/"
+		return division(num1, num2)
+	end
+end
+
+# puts calculate('+', '2', '2') 
