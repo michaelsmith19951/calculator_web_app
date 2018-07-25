@@ -1,7 +1,7 @@
 body {
 	text-align: center;
-	background-color: #a6c12a; /* Tan Yellow*/
-	color: orange;
+	background-image: url("/images/background.jpg");
+	color: #09074f; /* Dark Blue*/
 	background-size: cover;
 	font-weight: bold;
 }
@@ -35,3 +35,8 @@ body {
 	padding: 25px;
 	margin: 25px;
 }
+
+.radio {
+    margin-left:10px;
+}
+

@@ -42,8 +42,7 @@ end
 def division(first_number, second_number)
 # Conditional that removes divide by zero error
 if second_number == 0
-	nil
-p "You can't divide by zero! Please enter another number."
+answer = "You can't divide by zero"
 else
 if (first_number == "") || (second_number == "")
 	nil
